@@ -6,7 +6,7 @@
 /*   By: okotsuwa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 14:35:53 by okotsuwa          #+#    #+#             */
-/*   Updated: 2022/10/31 10:35:29 by okotsuwa         ###   ########.fr       */
+/*   Updated: 2022/10/31 11:52:48 by okotsuwa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ char	**ft_split(char const *s, char c)
 	i = -1;
 	while (++i < countword(s, c))
 	{
-		str[i] = malloc((arr[i] * sizeof(char)) + 1);
+		str[i] = malloc(((arr[i] + 1) * sizeof(char)));
 		if (!str[i])
 			free_splitt(str);
 	}
