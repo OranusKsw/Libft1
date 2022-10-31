@@ -6,7 +6,7 @@
 /*   By: okotsuwa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 14:35:53 by okotsuwa          #+#    #+#             */
-/*   Updated: 2022/10/31 12:10:46 by okotsuwa         ###   ########.fr       */
+/*   Updated: 2022/10/31 12:42:47 by okotsuwa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 static void	free_splitt(char **str)
 {
-	char	*tmp;
+	char	**tmp;
 
 	if (!str || !(*str))
 		return ;
+	tmp = str;
 	while (*str)
 	{
-		tmp = (*str)++;
 		free(*str);
-		*str = tmp;
+		str++;
 	}
-	free(str);
+	free(tmp);
 }
 
 static int	countword(char const *s, char c)
@@ -107,12 +107,11 @@ char	**ft_split(char const *s, char c)
 	if (!s)
 		return (NULL);
 	arr = lenword(s, c, countword(s, c));
-	if (!arr)
-		return (NULL);
 	str = malloc((countword(s, c) + 1) * sizeof(char *));
-	if (!str)
+	if (!str || !arr)
 	{
-		free(arr);
+		if (arr)
+			free(arr);
 		return (NULL);
 	}
 	i = -1;
@@ -120,8 +119,10 @@ char	**ft_split(char const *s, char c)
 	{
 		str[i] = malloc(((arr[i] + 1) * sizeof(char)));
 		if (!str[i])
+		{
 			free_splitt(str);
+			return (NULL);
+		}
 	}
-	str = split(s, str, c, arr);
-	return (str);
+	return (split (s, str, c, arr));
 }
