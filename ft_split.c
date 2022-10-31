@@ -6,7 +6,7 @@
 /*   By: okotsuwa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 14:35:53 by okotsuwa          #+#    #+#             */
-/*   Updated: 2022/10/31 11:52:48 by okotsuwa         ###   ########.fr       */
+/*   Updated: 2022/10/31 12:10:46 by okotsuwa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 
 static void	free_splitt(char **str)
 {
+	char	*tmp;
+
 	if (!str || !(*str))
 		return ;
 	while (*str)
 	{
+		tmp = (*str)++;
 		free(*str);
-		str++;
+		*str = tmp;
 	}
 	free(str);
 }
