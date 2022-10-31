@@ -6,15 +6,17 @@
 /*   By: okotsuwa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 07:39:23 by okotsuwa          #+#    #+#             */
-/*   Updated: 2022/10/30 09:04:42 by okotsuwa         ###   ########.fr       */
+/*   Updated: 2022/10/31 10:33:10 by okotsuwa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include<stdlib.h>
-# include<unistd.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdint.h>
+# include <limits.h>
 
 typedef struct s_list
 {

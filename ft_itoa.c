@@ -6,12 +6,11 @@
 /*   By: okotsuwa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 20:18:52 by okotsuwa          #+#    #+#             */
-/*   Updated: 2022/10/28 22:24:41 by okotsuwa         ###   ########.fr       */
+/*   Updated: 2022/10/30 16:53:32 by okotsuwa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 int	countn(int n)
 {

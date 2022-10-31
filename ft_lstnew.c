@@ -6,7 +6,7 @@
 /*   By: okotsuwa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 23:09:36 by okotsuwa          #+#    #+#             */
-/*   Updated: 2022/10/30 09:53:47 by okotsuwa         ###   ########.fr       */
+/*   Updated: 2022/10/30 16:56:19 by okotsuwa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_list	*ft_lstnew(void *content)
 {
 	t_list	*node;
 
-	node = (t_list *)malloc(sizeof(t_list));
+	node = malloc(sizeof(t_list));
 	if (!node)
 		return (NULL);
 	node->content = content;

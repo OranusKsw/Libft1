@@ -6,13 +6,13 @@
 /*   By: okotsuwa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 09:46:46 by okotsuwa          #+#    #+#             */
-/*   Updated: 2022/10/29 12:31:16 by okotsuwa         ###   ########.fr       */
+/*   Updated: 2022/10/31 10:36:05 by okotsuwa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	isset(char c, char const *set)
+static int	isset(char c, char const *set)
 {
 	while (*set)
 	{

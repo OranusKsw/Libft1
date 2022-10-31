@@ -6,39 +6,44 @@
 /*   By: okotsuwa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 14:35:53 by okotsuwa          #+#    #+#             */
-/*   Updated: 2022/10/29 21:09:14 by okotsuwa         ###   ########.fr       */
+/*   Updated: 2022/10/31 10:35:29 by okotsuwa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	issep(char c, char s)
+static void	free_splitt(char **str)
 {
-	if (c == s)
-		return (1);
-	return (0);
+	if (!str || !(*str))
+		return ;
+	while (*str)
+	{
+		free(*str);
+		str++;
+	}
+	free(str);
 }
 
-int	countword(char const *s, char c)
+static int	countword(char const *s, char c)
 {
 	int	word;
 
 	word = 0;
 	while (*s)
 	{
-		while (*s && issep(*s, c))
+		while (*s && (*s == c))
 			s++;
-		if (*s && !issep(*s, c))
+		if (*s && !(*s == c))
 		{
 			word++;
-			while (*s && !issep(*s, c))
+			while (*s && !(*s == c))
 				s++;
 		}
 	}
 	return (word);
 }
 
-int	*lenword(char const *s, char c, int word)
+static int	*lenword(char const *s, char c, int word)
 {
 	int	*arr;
 	int	i;
@@ -52,11 +57,11 @@ int	*lenword(char const *s, char c, int word)
 	i = 0;
 	while (word--)
 	{
-		while (*s && issep(*s, c))
+		while (*s && *s == c)
 			s++;
-		if (*s && !issep(*s, c))
+		if (*s && !(*s == c))
 		{
-			while (*s && !issep(*s, c))
+			while (*s && !(*s == c))
 			{
 				s++;
 				arr[i]++;
@@ -67,7 +72,7 @@ int	*lenword(char const *s, char c, int word)
 	return (arr);
 }
 
-char	**split(const char *s, char **str, char c, int *arr)
+static char	**split(const char *s, char **str, char c, int *arr)
 {
 	int	i;
 	int	j;
@@ -77,7 +82,7 @@ char	**split(const char *s, char **str, char c, int *arr)
 	word = countword(s, c);
 	while (i < word)
 	{
-		while (*s && issep(*s, c))
+		while (*s && (*s == c))
 			s++;
 		j = 0;
 		while (j < arr[i] && *s)
@@ -94,40 +99,26 @@ char	**ft_split(char const *s, char c)
 {
 	char	**str;
 	int		*arr;
-	int		word;
 	int		i;
 
 	if (!s)
 		return (NULL);
-	word = countword(s, c);
-	arr = lenword(s, c, word);
+	arr = lenword(s, c, countword(s, c));
 	if (!arr)
 		return (NULL);
-	str = malloc((word + 1) * sizeof(char *));
+	str = malloc((countword(s, c) + 1) * sizeof(char *));
 	if (!str)
 	{
 		free(arr);
 		return (NULL);
 	}
 	i = -1;
-	while (++i < word)
+	while (++i < countword(s, c))
+	{
 		str[i] = malloc((arr[i] * sizeof(char)) + 1);
+		if (!str[i])
+			free_splitt(str);
+	}
 	str = split(s, str, c, arr);
 	return (str);
 }
-/*
-#include<stdio.h>
-int main()
-{
-	char **str;
-	int	i;
-	i= 0;
-	str = ft_split("  tripouille  42  ", ' ');
-	while(str[i])
-	{
-		free(str[i]);
-		i = i + 1;
-	}
-	free(str);
-	return (0);
-}*/
